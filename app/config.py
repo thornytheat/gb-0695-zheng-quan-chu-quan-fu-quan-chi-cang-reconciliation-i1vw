@@ -1,5 +1,5 @@
 from pathlib import Path
-RULE_VERSION = "2026.11.18.2"
+RULE_VERSION = "2026.11.20.1"
 TITLE = '证券除权复权与持仓对账'
 SHORT = 'equity-adjust'
 MODULES = ['行动接收', '证券映射', '权益登记', '除权因子', '持仓重算', '现金对账', '修订回放']

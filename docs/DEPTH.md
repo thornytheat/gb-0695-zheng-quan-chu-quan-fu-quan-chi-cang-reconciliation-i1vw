@@ -28,10 +28,12 @@
 | TRAP-14 | 行动定义冲突 | 静默覆盖或误计 | 显式裁决并保留证据 | `app/modules/m2_mapping/rules.py` | `tests/test_m2.py::test_conflicting_action_removed` |
 | TRAP-24 | 现金尾差 | 静默覆盖或误计 | 显式裁决并保留证据 | `app/modules/m5_holdings/rules.py` | `tests/test_m5.py::test_largest_remainder_conservation` |
 | TRAP-25 | 行动版本选择 | 静默覆盖或误计 | 显式裁决并保留证据 | `app/modules/m2_mapping/rules.py` | `tests/test_m2.py::test_latest_action_chosen` |
+| TRAP-26 | 同除权日多公告合并 | 误当同一行动互相覆盖 | 按record分组件合并，冲突隔离 | `app/modules/m2_mapping/rules.py` | `tests/test_events.py::test_announcements_compose_single_event` |
+| TRAP-27 | 晚到配股登记 | 待核配股多记股份或开盘无价 | 参考价如期发布，待核组件暂缓计股并单列 | `app/modules/m3_registry/rules.py`、`app/modules/m5_holdings/rules.py` | `tests/test_events.py::test_pending_rights_withheld_from_shares` |
 
 ## 对账规则
 
-输入记录 = 采信记录 + 隔离记录 + 相同行重复。重复表头与空行单独记数。业务合计按阶段中的守恒或差值列复核。运行清单有原文SHA256、规则版本与耗时；相同规则版本下同文重复提交复用批次。
+输入记录 = 采信记录 + 隔离记录 + 相同行重复。重复表头与空行单独记数。业务合计按阶段中的守恒或差值列复核。运行清单有原文SHA256、规则版本与耗时；相同规则版本下同文重复提交复用批次。持仓按快照全量复算而非增量累加，重跑同一组公告不会重复计股；登记依据补齐产生新批次，价格状态与持仓在其中一起更新，旧批次保留可凭run_id核对；复算中断（结构错误或运行异常）不写入任何半成品，此前批次不受影响。
 
 ## 已知不覆盖
 

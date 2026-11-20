@@ -6,7 +6,7 @@ def test_reference_formula():
 def test_factor_precise(): # TRAP-10
     a={'price':'10','cash':'0','bonus':'1','rights':'0','rights_price':'0'};assert action_math(a)==(Decimal(5),Decimal('0.5'))
 def test_no_action_identity():assert action_math({'price':'10','cash':'0','bonus':'0','rights':'0','rights_price':'0'})==(Decimal(10),Decimal(1))
-def test_sample_factor_rows(ctx):assert len(ctx['stages']['4']['rows'])==19
+def test_sample_factor_rows(ctx):assert len(ctx['stages']['4']['rows'])==20
 def test_dividend_not_price_addition():assert action_math({'price':'10','cash':'1','bonus':'0','rights':'0','rights_price':'0'})[0]==9
 def test_invalid_action_rejected():
     import pytest

@@ -1,2 +1,2 @@
 {% extends 'base.html' %}
-{% block stage_visual %}{% for r in run.stages["4"].rows[:5] %}<div class="entry"><span>{{r["证券"]}}</span><b>{{r["参考价_CNY"]}}</b></div><div class="factor-track"><i style="width:{{[100,r['复权因子']|float*50]|min}}%"></i></div>{% endfor %}<small>复权因子刻度 0–2</small>{% endblock %}
+{% block stage_visual %}{% for r in run.stages["5"].rows[:5] %}<div class="entry {{'diff' if r['状态']!='已核'}}"><span>{{r["持仓记录"]}}<br><small>{{r["证券"]}} · {{r["状态"]}}</small></span><b>{{r["新股份"]}} 股<br><small>待核 {{r["待核股份"]}} 股</small></b></div>{% endfor %}<small>新股份仅含已核组件；待核配股单列，不计入新股份。</small>{% endblock %}

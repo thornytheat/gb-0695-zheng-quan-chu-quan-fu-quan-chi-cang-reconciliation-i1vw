@@ -1,2 +1,2 @@
 {% extends 'base.html' %}
-{% block stage_visual %}{% for r in run.stages["4"].rows[:5] %}<div class="entry"><span>{{r["证券"]}}</span><b>{{r["参考价_CNY"]}}</b></div><div class="factor-track"><i style="width:{{[100,r['复权因子']|float*50]|min}}%"></i></div>{% endfor %}<small>复权因子刻度 0–2</small>{% endblock %}
+{% block stage_visual %}{% for r in run.stages["4"].rows[:5] %}<div class="entry {{'diff' if r['状态']=='暂定'}}"><span>{{r["证券"]}}<br><small>参考价采用 {{r["参考价采用"]}}<br>持仓采用 {{r["持仓采用"]}}</small></span><b>{{r["参考价_CNY"]}}<br><small>{{r["状态"]}}{% if r["待核行动"]!='—' %} · 待核 {{r["待核行动"]}}{% endif %}</small></b></div><div class="factor-track"><i style="width:{{[100,r['复权因子']|float*50]|min}}%"></i></div>{% endfor %}<small>参考价按公告如期发布；待核配股不计入持仓，依据补齐后同批更新。复权因子刻度 0–2</small>{% endblock %}
